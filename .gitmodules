@@ -1,0 +1,3 @@
+[submodule "pushplan.wiki"]
+	path = pushplan.wiki
+	url = ../pushplan.wiki.git
