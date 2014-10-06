@@ -1,0 +1,122 @@
+
+<template name="splash">
+  
+  <!-- About -->
+  <div id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div id="logo" class="col-md-12  text-center"> 
+          <img src="/logo620.png" width="310px"/>
+          <h3 class="compact">Simplify Group Decisions.</h3>
+          <!--h4 Collaboration is the key.
+              We've created a central hub for kickstarting social events.
+              Everything you need to make a decision, together in one place.
+          </h4-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-center">  
+          <h5 id="no-email"> No email required, pick a username and start planning! </h5>
+          <form  style="padding-bottom:10px" role="form" id="sign_up_form">
+            <div class="form-group {{valid_user_name}}">
+              <input type="text" class="form-control" name="username" placeholder="Pick a Name">
+
+              <span class="help-block">
+                  <ul class="list-unstyled">
+                      
+                  </ul>
+              </span>
+            </div>
+            <div class="form-group {{valid_password}}">
+              <input type="password" class="form-control" name="password" placeholder="Create a Password">
+              <span class="help-block">
+                  <ul class="list-unstyled">
+                      
+                  </ul>
+              </span>
+            </div>
+            <button type="submit" class="btn btn-default btn-warning">Sign In / Sign Up</button>
+          </form>
+          <a href="/passwordReset"> forgot your password? </a> 
+          <br/>
+          Or login with
+          <ul class="list-inline">
+            
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /About -->
+ 
+  <!-- Services -->
+  <div id="services" class="services">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-calendar"></span></i>
+          <h4>Schedule Events</h4>
+          <p>Quickly find a time that fits everyone's schedule.</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-cloud-upload"></span></i>
+          <h4>Brainstorm Ideas</h4>
+          <p>Facebook is great for sending out invitations, but how do you choose the event in the first place? Let everyone propose ideas.</p><!--Out of ideas? We can suggest some for you.-->
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-stats"></span></i>
+          <h4>Vote</h4>
+          <p>Reach a decision quickly by putting the ideas to a vote! Immediatley see which ideas generate the most traction.</p> <!-- and use the group chat to help deliberate.</p-->
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-send"></span></i>
+          <h4>Send Once</h4>
+          <p>Each link can contain multiple polls, send everything at once.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Services -->
+  <div class="services2">
+    <div class="row hideme">
+      <!--div class="col-md-3 text-center">
+        <div class="service-item">
+          <i class="service-icon"><h1 class="service-item">Re: <br>&nbsp;&nbsp;  Re: <br>&nbsp; &nbsp; &nbsp; &nbsp; Re: <br></h1></i>
+          <h4>Avoid Digging through large email/text threads</h4>
+        </div>
+      </div-->
+      <div class="col-md-4 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-phone"></span></i>
+          <h4>Mobile Friendly</h4>
+          <p>Check how plans are unfolding, even when you're on the go.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="service-item">
+          <i class="service-icon"><span class="glyphicon glyphicon-bullhorn"></span></i>
+          <h4>Notifications</h4>
+          <p>Quick notifications from the dashboard alert you the moment you get a response.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="service-item ">
+          <i class="service-icon"><span class="glyphicon glyphicon-indent-right"></span><span class="glyphicon glyphicon-indent-left"></span></i>
+          <h4>No Digging Through Conversations</h4> 
+          <p>Group votes and availability are kept separate from the group chat, so important info never gets buried in long conversations.</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</template>
+
+

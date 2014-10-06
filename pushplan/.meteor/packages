@@ -4,10 +4,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 iron:router
 spiderable
 meteorhacks:kadira
 datariot:ganalytics
 meteorhacks:fast-render
+mizzao:bootstrap-3
 

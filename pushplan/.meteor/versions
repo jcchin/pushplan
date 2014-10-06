@@ -1,6 +1,5 @@
 accounts-base@1.1.1
 application-configuration@1.0.2
-autopublish@1.0.0
 autoupdate@1.1.1
 base64@1.0.0
 binary-heap@1.0.0
@@ -39,6 +38,7 @@ meteorhacks:kadira-binary-deps@1.2.0
 meteorhacks:kadira@2.11.2
 minifiers@1.1.0
 minimongo@1.0.3
+mizzao:bootstrap-3@3.2.0_1
 mobile-status-bar@1.0.0
 mongo-livedata@1.0.5
 mongo@1.0.6
