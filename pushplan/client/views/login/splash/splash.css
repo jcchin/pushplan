@@ -1,3 +1,126 @@
 /*****************************************************************************/
 /* Splash: Style */
 /*****************************************************************************/
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+.header {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: url(../PushPlanLogo_cropped.png) no-repeat center center;
+  background-size: cover;
+}
+
+#logo {
+  /*font-family: 'Lato', Arial, sans-serif;*/
+  padding: 50px 0px 16px 0px;
+}
+/* Intro */
+
+.intro {
+  padding: 50px 0;
+}
+
+/* About */
+
+.about {
+  background: rgba(224, 224, 235, 0.29);
+  /*background: linear-gradient(90deg, #B3B3BC 0%,#FFFFFF 100%);*/
+  padding-top: 40px;
+  padding-bottom: 20px;
+  -webkit-box-shadow: inset 0 -3px 7px -1px rgba(0,0,0,.2), inset 0 -3px 7px -1px rgba(0,0,0,.2);
+}
+
+.about input {
+    text-align: center;
+}
+/* Services */
+
+.services {
+  border-top-color: rgb(238, 238, 238);
+  background: #7fbbda;
+  padding: 50px 0;
+  color: #ffffff;
+  /*-webkit-box-shadow: 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);*/
+}
+
+.services2 {
+  background: #7fbbda;/*#FFFFFF; */
+  padding: 50px 0px;
+  color: #FFFFFF; /*#000000; /*#7fbbda;*/
+}
+.servicesTop {
+  background: #E0E0EB; /*#666666;/*#FFFFFF; */
+  padding: 40px 0px;
+  color: #FFFFFF; /*#000000; /*#7fbbda;*/
+}
+
+.service-item {
+  margin-bottom: 15px;
+}
+
+.services i.service-icon {
+  border: 3px solid #FFFFFF;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 56px;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  vertical-align: middle; 
+  text-align: center;
+}
+
+.services2 i.service-icon {
+  border: 3px solid #FFFFFF; /*#000000; /*7fbbda*/
+  -webkit-border-radius: 50%; /*7fbbda*/
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 56px;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  vertical-align: middle; 
+  text-align: center;
+}
+
+
+.service-icon h1 {
+  position: relative;
+  bottom: 8px;
+  right: 10px;
+  margin-left: -20px;
+}
+
+i.service-icon:hover {
+  font-size: 68px;
+}
+.service-icon h1:hover {
+  font-size: 42px;
+  position: relative;
+  bottom: 16px;
+  right: 10px;
+  margin-left: -20px;
+}
+
+.service-icon .glyphicon-send{
+  position: relative;
+  top: 4px;
+  right: 6px;
+}
+
+#no-email {
+  margin-top: 15px;
+  margin-bottom: 4px;
+}
+
+#sign-up-name{
+  margin-bottom: 0px;
+}
+
+.hideme
+{
+    opacity:0;
+}
