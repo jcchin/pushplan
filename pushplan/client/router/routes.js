@@ -1,119 +1,121 @@
-Router.map(function () {
-    this.route('splash', {
-        path: '/',
-        waitOn: function() { 
-            Meteor.subscribe('directory');
-            return;
+//Client Side Routes
+Router.route('splash', {
+    path: '/',
+    waitOn: function() { 
+        Meteor.subscribe('directory');
+        return;
+    }
+});
+Router.route('loginForm', {
+    path: "/login"
+});
+Router.route('dashboard',{
+    path: "/dashboard",
+    layoutTemplate: 'DashboardLayout',
+    loadingTemplate: 'loading',
+    waitOn: function() { 
+        return Meteor.subscribe("huddles");
+    },
+    onBeforeAction: function() {
+        if (!Meteor.user()) {
+            this.redirect('/');
         }
-    });
-    this.route('loginForm', {
-        path: "/login"
-    });
-    this.route('dashboard',{
-        path: "/dashboard",
-        //layoutTemplate: 'layout',
-        loadingTemplate: 'loading',
-        waitOn: function() { 
-            return Meteor.subscribe("huddles");
-        },
-        onBeforeAction: function() {
-            if (!Meteor.user()) {
-                this.redirect('/');
-            }
-        }
-    });
-    this.route('dashboard',{
-        path: "/dashboard/verify/:token",
-        loadingTemplate: 'loading',
-        waitOn: function() { 
-            return Meteor.subscribe("huddles");
-        },
-        onBeforeAction: function() {
-            var token = this.params.token;
-            Accounts.verifyEmail(token, function(){
-                Router.go('/dashboard');
-            });
-        }
-    });
-    this.route('passwordResetForm', {
-        path:"/passwordReset/:token",
-        data: function(){
-            var token = this.params.token;
-            Session.set('resetPasswordToken',token);
-        }
-    });
-    this.route('passwordResetForm', {
-        path:"/passwordReset",
-    });
-    this.route('logout', {
-        path: "/logout"
-    });
-    this.route('huddle',{
-        path: "/huddles/:huddle_id",
-        loadingTemplate: 'loading2',
-        waitOn: function() { 
-            Meteor.subscribe("ideas", Session.get('huddle_id'));
-            Meteor.subscribe("huddle", Session.get('huddle_id'));
-            Meteor.subscribe('directory');
-            var huddle_id = this.params.huddle_id;
-            Session.set('huddle_id', huddle_id);
-            return;
-        },
-        onBeforeAction: function(){
-            var huddle_id = this.params.huddle_id;
-            Session.set('huddle_id', huddle_id);
-            Session.set('enrollPasswordToken', undefined); //hack to clear the token
-            Session.set('huddle-admin', undefined); // hack to clear the token
-        }
-    });
-    this.route('huddle_enroll',{
-        path: "/huddles/:huddle_id/enroll/:token",
-        loadingTemplate: 'loading',
-        waitOn: function() { 
-            Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
-            Meteor.subscribe("huddle", Session.get('huddle_id'));
-            Meteor.subscribe('directory');
-            return;
-        },
-        onBeforeAction: function(){
-            var huddle_id = this.params.huddle_id;
-            Session.set('huddle_id', huddle_id);
+    },
+    action: function(){
+        this.render('dash', {to:'dash'});
+    }
+});
+Router.route('dashboard',{
+    path: "/dashboard/verify/:token",
+    loadingTemplate: 'loading',
+    waitOn: function() { 
+        return Meteor.subscribe("huddles");
+    },
+    onBeforeAction: function() {
+        var token = this.params.token;
+        Accounts.verifyEmail(token, function(){
+            Router.go('/dashboard');
+        });
+    }
+});
+Router.route('passwordResetForm', {
+    path:"/passwordReset/:token",
+    data: function(){
+        var token = this.params.token;
+        Session.set('resetPasswordToken',token);
+    }
+});
+Router.route('passwordResetForm', {
+    path:"/passwordReset",
+});
+Router.route('logout', {
+    path: "/logout"
+});
+Router.route('huddle',{
+    path: "/huddles/:huddle_id",
+    loadingTemplate: 'loading2',
+    waitOn: function() { 
+        Meteor.subscribe("ideas", Session.get('huddle_id'));
+        Meteor.subscribe("huddle", Session.get('huddle_id'));
+        Meteor.subscribe('directory');
+        var huddle_id = this.params.huddle_id;
+        Session.set('huddle_id', huddle_id);
+        return;
+    },
+    onBeforeAction: function(){
+        var huddle_id = this.params.huddle_id;
+        Session.set('huddle_id', huddle_id);
+        Session.set('enrollPasswordToken', undefined); //hack to clear the token
+        Session.set('huddle-admin', undefined); // hack to clear the token
+    }
+});
+Router.route('huddle_enroll',{
+    path: "/huddles/:huddle_id/enroll/:token",
+    loadingTemplate: 'loading',
+    waitOn: function() { 
+        Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
+        Meteor.subscribe("huddle", Session.get('huddle_id'));
+        Meteor.subscribe('directory');
+        return;
+    },
+    onBeforeAction: function(){
+        var huddle_id = this.params.huddle_id;
+        Session.set('huddle_id', huddle_id);
 
-            var token = this.params.token;
-            Session.set('enrollPasswordToken',token);
-        },
-        template:'huddle'
-    });
-    // admin routes
-    this.route('admin_dashboard', {
-        path:'/admin',
-        loadingTemplate: 'loading',
-        waitOn: function() { 
-            return Meteor.subscribe("huddles", true);
-        },
-        onBeforeAction: function() {
-            Session.set('huddle-admin', true);
-        }
-    });
-    this.route('admin_huddle', {
-        path:'/admin/huddles/:huddle_id',
-        loadingTemplate: 'loading',
-        waitOn: function() { 
-            Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
-            Meteor.subscribe("huddle", Session.get('huddle_id'));
-            Meteor.subscribe('directory');
-            return;
-        },
-        onBeforeAction: function(){
-            var huddle_id = this.params.huddle_id;
-            Session.set('huddle_id', huddle_id);
-            Session.set('huddle-admin', true);
-        },
-        template: 'huddle'
-    });
-    this.route('mobile', {
-        path:'/mobile'
-    });
+        var token = this.params.token;
+        Session.set('enrollPasswordToken',token);
+    },
+    template:'huddle'
+});
+// admin routes
+Router.route('admin_dashboard', {
+    path:'/admin',
+    loadingTemplate: 'loading',
+    waitOn: function() { 
+        return Meteor.subscribe("huddles", true);
+    },
+    onBeforeAction: function() {
+        Session.set('huddle-admin', true);
+    }
+});
+Router.route('admin_huddle', {
+    path:'/admin/huddles/:huddle_id',
+    loadingTemplate: 'loading',
+    waitOn: function() { 
+        Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
+        Meteor.subscribe("huddle", Session.get('huddle_id'));
+        Meteor.subscribe('directory');
+        return;
+    },
+    onBeforeAction: function(){
+        var huddle_id = this.params.huddle_id;
+        Session.set('huddle_id', huddle_id);
+        Session.set('huddle-admin', true);
+    },
+    template: 'huddle'
+});
+Router.route('mobile', {
+    path:'/mobile'
 });
 
 Meteor.startup(function () {
@@ -320,16 +322,17 @@ Meteor.startup(function () {
 
 
 
-Handlebars.registerHelper('isNotLogin', function() {
+UI.registerHelper('isNotLogin', function() {
     if (Meteor.user()) {
         return false;
     }
     return true;
 });
 
-Handlebars.registerHelper(
+UI.registerHelper(
     "formErrors",
-    function (field_name) {
+    function () {
+        var field_name = this.email;
         var errs = Session.get('form-errors');
         var errors = "";
         if (errs){
@@ -342,7 +345,7 @@ Handlebars.registerHelper(
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     "formErrorClass",
     function (field_name) {
         var errs = Session.get('form-errors');
@@ -353,7 +356,7 @@ Handlebars.registerHelper(
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     'valid_user_name',
     function(){
         var new_name = Session.get('new-username');
@@ -372,7 +375,7 @@ Handlebars.registerHelper(
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     'valid_password',
     function(){
         var password = Session.get('new-password');
@@ -388,7 +391,7 @@ Handlebars.registerHelper(
 );
 
 
-Handlebars.registerHelper( //this has to be done on the server..should be refactored.
+UI.registerHelper( //this has to be done on the server..should be refactored.
     'serviceActive',
     function(service){
         var user = Meteor.user()._id;
@@ -409,21 +412,21 @@ Handlebars.registerHelper( //this has to be done on the server..should be refact
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     'verified',
     function( user_id ){
         return verified( user_id );
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     'displayName',
     function( user ){
         return displayName( user );
     }
 );
 
-Handlebars.registerHelper(
+UI.registerHelper(
     'linkify',
     function(text){
         if(text){
@@ -433,7 +436,7 @@ Handlebars.registerHelper(
     }
 );
 
-Handlebars.registerHelper('sm', function(){
+UI.registerHelper('sm', function(){
     var size = getViewPortSize();
     if (size.width < 990){
         return true;

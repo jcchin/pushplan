@@ -1,0 +1,146 @@
+<!-- main area -->
+<template name="dash">
+  <div id="main-panel" class="col-sm-9 col-md-9 huddle-list visible-xs">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="text-center"> Dashboard </h1> 
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled pull-left align-left">
+              <li> <span class="user-badge"> <span class="badge"><span class="glyphicon glyphicon-user" title="Num. of participants"></span></span>Participants </span> </li> 
+              <li> <span class="idea-badge"> <span class="badge"><span class="fa fa-lightbulb-o fa-badge" title="Num. of new ideas"></span></span>Ideas </span> </li> 
+              <li> <span class="chat-badge"> <span class="badge"><span class="glyphicon glyphicon-comment" title="Num. of new comments"></span></span>Chats </span> </li> 
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-unstyled pull-right align-right">
+              <!--
+              <li> Finalized Polls <span class="badge"><span class="glyphicon glyphicon-saved"></span></span> </li> 
+            -->
+              <li> Leave Huddle <span class="badge badge-warning"><span class="glyphicon glyphicon-remove"></span></span> </li>
+            </ul>
+          </div>
+        </div>
+        <table class="table table-hover table-bordered">
+          {{#each huddles}}
+          <tr class="huddle-row">
+            <td class="text-center vert-align">
+              <span title="Leave Huddle" class="badge badge-warning huddle-delete"><span class="glyphicon glyphicon-remove"></span></span>
+            </td>
+            <td class="clickable text-center"><strong><a href="/huddles/{{_id}}">{{name}}</a></strong>: {{formatDate date_time "short"}}
+            <!--<button type="button" class="btn btn-warning btn-xs delete" ><span class="glyphicon glyphicon-trash"></span></button></li>-->
+            <br>
+              <span title="Num. of Participants" class="badge"><span class="glyphicon glyphicon-user"></span> {{huddle_stats _id 'people'}}</span>
+              {{#if huddle_stats _id 'new_people'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_people'}}</span>
+              {{/if}}
+
+              &nbsp;&nbsp;<span title="Num. of Ideas " class="badge"><span class="fa fa-lightbulb-o fa-badge"></span></span>
+              {{#if huddle_stats _id 'new_ideas'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_ideas'}}</span>
+              {{/if}}
+
+              &nbsp;&nbsp;<span title="Num. of Comments" class="badge"><span class="glyphicon glyphicon-comment"></span></span>
+              {{#if huddle_stats _id 'new_chats'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_chats'}}</span>
+              {{/if}}
+            <br>
+              <!--<span title="Decision Status" class="badge"><span class="glyphicon glyphicon-saved"></span></span>-->
+            </td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div class="panel-footer">
+        {{#if checkWall}}
+          <label> You have joined 5 huddles, please verify your email to add more. We need to make sure you're human </label>
+        {{else}}
+        <form class="add_new_huddle" role="form">
+          <div class="input-group">
+            <input type="text" class="form-control add-huddle-name" placeholder="Start a new group!">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-success add-huddle-button"><span class="glyphicon glyphicon-plus"></span></button> 
+            </span>
+          </div><!-- /input-group -->
+        </form>
+        {{/if}}
+      </div>
+    </div><!-- /panel  -->
+  </div>
+  <div class="col-sm-9 col-md-9 huddle-list hidden-xs">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <h1 class="text-center"> Dashboard </h1>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          
+          <div class="col-md-6">
+            <ul class="list-unstyled pull-left align-left">
+              <li> <span class="user-badge"> <span class="badge"><span class="glyphicon glyphicon-user" title="Num. of participants"></span></span>Participants </span> </li> 
+              <li> <span class="idea-badge"> <span class="badge"><span class="fa fa-lightbulb-o fa-badge" title="Num. of new ideas"></span></span>Ideas </span> </li> 
+              <li> <span class="chat-badge"> <span class="badge"><span class="glyphicon glyphicon-comment" title="Num. of new comments"></span></span>Chats </span> </li> 
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-unstyled pull-right align-right">
+              <!--
+              <li> Finalized Polls <span class="badge"><span class="glyphicon glyphicon-saved"></span></span> </li> 
+            -->
+              <li> Leave Huddle <span class="badge badge-warning"><span class="glyphicon glyphicon-remove"></span></span> </li>
+            </ul>
+          </div>
+        </div>
+        <table class="table table-hover table-bordered">
+          {{#each huddles}}
+          <tr class="huddle-row">
+            <td class="text-center">
+              <span title="Leave Huddle" class="badge badge-warning huddle-delete"><span class="glyphicon glyphicon-remove"></span></span>
+            </td>
+            <td class="clickable text-center"><strong><a href="/huddles/{{_id}}">{{name}}</a></strong>: {{formatDate date_time "short"}}
+            <!--<button type="button" class="btn btn-warning btn-xs delete" ><span class="glyphicon glyphicon-trash"></span></button></li>-->
+            </td>
+            <td class="clickable text-center badge-list">
+              <span title="Num. of Participants" class="badge"><span class="glyphicon glyphicon-user"></span> {{huddle_stats _id 'people'}}</span>
+              {{#if huddle_stats _id 'new_people'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_people'}}</span>
+              {{/if}}
+
+              &nbsp;&nbsp;<span title="Num. of Ideas " class="badge"><span class="fa fa-lightbulb-o fa-badge"></span> {{huddle_stats _id 'ideas'}}</span>
+              {{#if huddle_stats _id 'new_ideas'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_ideas'}}</span>
+              {{/if}}
+
+              &nbsp;&nbsp;<span title="Num. of Comments" class="badge"><span class="glyphicon glyphicon-comment"></span></span>
+              {{#if huddle_stats _id 'new_chats'}}
+                <span class="badge badge-danger badge-notify">{{huddle_stats _id 'new_chats'}}</span>
+              {{/if}}
+            </td>
+            <td class="clickable text-center">
+              <!--
+              <span title="Decision Status" class="badge"><span class="glyphicon glyphicon-saved"></span></span>
+            -->
+            </td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div class="panel-footer">
+        {{#if checkWall}}
+          <label> You have joined 5 huddles, please verify your email to add more. (We need to make sure you're human) </label>
+        {{else}}
+        <form class="add_new_huddle" role="form">
+          <div class="input-group">
+            <input type="text" class="form-control add-huddle-name" placeholder="Start a new group!">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-success add-huddle-button"><span class="glyphicon glyphicon-plus"></span></button> 
+            </span>
+          </div><!-- /input-group -->
+        </form>
+        {{/if}}
+      </div>
+    </div><!-- /panel  -->
+  </div>
+</template>

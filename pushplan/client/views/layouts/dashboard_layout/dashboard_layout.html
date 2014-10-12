@@ -1,0 +1,114 @@
+<!-- List of Huddles -->
+<template name="DashboardLayout">
+  <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button id="settings-button" type="button button-info" class="navbar-toggle acct_settings pull-left" data-toggle="offcanvas" data-target=".sideB-nav">
+           <span class="glyphicon glyphicon-cog"></span>
+         </button>
+        {{#if currentUser}}
+          <a class="navbar-brand" href="/">{{displayName ''}}</a>
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        {{else}}
+          <a href="/login" class="navbar-brand">Sign In</a>
+        {{/if}}
+        
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <!-- Nothing to collapse yet
+          <li><a href="/"></a></li>
+          <li><a href="/"></a></li>
+          -->
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      <div class="clearfix"></div>
+    </div><!-- /.container -->
+  </nav>
+
+  <div class="container">
+    <div id="settings-panel" class="row row-offcanvas row-offcanvas-left">
+      <!-- sidebar -->
+      <div class="col-sm-3 col-md-3 sideB-offcanvas" id="sideB" role="navigation">
+        <ul class="nav">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <h2 class="text-center"><span class="glyphicon glyphicon-cog"></span> Account </h2> 
+                <br>
+              </div>
+              <hr/>
+              <form role="form" id="account_info_form">
+                <div  class="form-group {{valid_user_name}}">
+                  <label title='Name Used To Log In'>Username</label>
+                  <input type="text" class="form-control" name="username" value="{{username}}">
+                  <span class="help-block">
+                      <ul class="list-unstyled">
+                          
+                      </ul>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label title='Name Shown To Other Users'>Display Name </label>
+                  <input type="text" class="form-control" name="real_name" placeholder="Enter your name" value="{{real_name}}">
+                  <span class="help-block">
+                      <ul class="list-unstyled">
+                          
+                      </ul>
+                  </span>
+                </div>
+                <button type="submit" class="btn btn-default btn-warning">Save Changes</button>
+              </form>
+            </div>
+            <div class="panel-footer">
+              <form role="form" id="change_password_form">
+                <div class="form-group {{formErrorClass 'old-password'}}">
+                  <label for="old-password">Change Password</label>
+                  <input id="old-password"  type="password" class="form-control" name="old-password" placeholder="Old Password">
+                  <span class="help-block">
+                      <ul class="list-unstyled">
+                          
+                      </ul>
+                  </span>
+                </div>
+                <div class="form-group {{formErrorClass 'new-password'}}">
+                  <input type="password" class="form-control" name="new-password" placeholder="New Password">
+                  <span class="help-block">
+                      <ul class="list-unstyled">
+                          
+                      </ul>
+                  </span>
+                </div>
+                <div class="form-group {{formErrorClass 'confirm-new-password'}}">
+                  
+                  <input type="password" class="form-control" name="confirm-new-password" placeholder="Confirm New Password">
+                  <span class="help-block">
+                      <ul class="list-unstyled">
+                          
+                      </ul>
+                  </span>
+                </div>
+                <button type="submit" class="btn btn-default btn-warning">Change Password
+                </button>
+              </form>
+            </div>
+          </div><!-- /panel  -->             
+        </ul>
+      </div>
+  
+      <!-- main area -->
+      {{> yield "dash"}}
+      <div class="col-sm-9 col-md-9">
+        <br>
+        <br>
+        <label class="hidden-xs">PushPlan looks great on mobile phones too! </label>
+        <a href="/mobile"><button type="button" class="btn btn-warning" ><span class="glyphicon glyphicon-phone"></span>&nbsp;Go Mobile!</button></a>
+
+         <label> Bookmark our site on your phone, or sign up to test our free app once it's ready!</label>
+        <br>
+      </div>
+    </div><!--/.row-->
+  </div><!--/.container-->
+</template>
+  <!-- /List of Huddles -->
