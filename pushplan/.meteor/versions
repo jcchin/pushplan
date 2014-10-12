@@ -1,6 +1,10 @@
 accounts-base@1.1.1
+accounts-facebook@1.0.1
+accounts-google@1.0.1
+accounts-oauth@1.1.1
 accounts-password@1.0.2
 accounts-ui-unstyled@1.1.2
+accounts-ui@1.1.1
 application-configuration@1.0.2
 autoupdate@1.1.1
 base64@1.0.0
@@ -33,6 +37,7 @@ iron:layout@0.4.1
 iron:router@0.9.4
 jquery@1.0.0
 json@1.0.0
+less@1.0.9
 livedata@1.0.10
 localstorage@1.0.0
 logging@1.0.3
