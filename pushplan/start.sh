@@ -19,7 +19,7 @@ elif [ "$APP_ENV" = "l" ]; then
 elif [ "$APP_ENV" = "dev" ]; then
     echo "Deploying PushPlan to to dev (pushplan.meteor.com)"
     meteor deploy pushplan.meteor.com --settings config/development/settings.
-elif [ "$APP_ENV" = "dev" ]; then
+elif [ "$APP_ENV" = "d" ]; then
     echo "Deploying PushPlan to dev (pushplan.meteor.com)"
     meteor deploy pushplan.meteor.com --settings config/development/settings.json
 #production

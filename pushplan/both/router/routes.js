@@ -9,6 +9,4 @@ Router.configure({
   routeControllerNameConverter: 'upperCamelCase'
 });
 
-Router.map(function () {
-    this.route('splash', {path: '/'});
-});
+

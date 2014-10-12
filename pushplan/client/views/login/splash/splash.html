@@ -1,6 +1,5 @@
 
 <template name="splash">
-  
   <!-- About -->
   <div id="about" class="about">
     <div class="container">
@@ -41,8 +40,12 @@
           <br/>
           Or login with
           <ul class="list-inline">
-            
-            
+            {{#each services}}
+              {{#if isPasswordService}}
+              {{else}}
+                {{> _loginService}}
+              {{/if}}
+            {{/each}}
           </ul>
         </div>
       </div>
@@ -118,5 +121,3 @@
   </div>
   
 </template>
-
-

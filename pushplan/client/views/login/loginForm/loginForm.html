@@ -1,0 +1,49 @@
+<template name="loginForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+               <h1> &nbsp; </h1>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">{{submit_text}}</span>
+                    </div>
+                    <div class="panel-body">
+                        <form id="login_form" role="form">
+                          <div class="form-group">
+                            <label>Username</label>
+                            <input name="username" type="text" class="form-control" placeholder="Enter Username">
+                            <span class="help-block">
+                                <ul class="list-unstyled">
+                                    {{{formErrors "username"}}}
+                                </ul>
+                            </span>
+                          </div>
+                          <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="password" class="form-control" placeholder="Password">
+                            <span class="help-block">
+                                <ul class="list-unstyled">
+                                    {{{formErrors "password"}}}
+                                </ul>
+                            </span>
+                          </div>
+                          <button id="login-password-submit" class="btn btn-primary">{{submit_text}}</button>
+                          <a href="/passwordReset"> forgot your password? </a> 
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="logout">
+</template>
+
+
+
+
+
