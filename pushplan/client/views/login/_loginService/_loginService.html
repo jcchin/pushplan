@@ -1,6 +1,7 @@
 <template name="_loginService">
-  <li><button class="btn btn-warning">
-    <span id="login-buttons-image-{{name}}" class="glyphicon login-service-icon"></span>
-    {{name}}
-  </button></li>
+    <li>
+        <button class="btn at-social-btn" id="at-{{name}}" name="{{name}}">
+            <i class="fa fa-{{name}}"></i> Sign In with {{name}}
+        </button>
+    </li>
 </template>
