@@ -176,8 +176,8 @@ Meteor.methods({
     });
 
     Email.send({
-          from: "noreply@pushplan.net", 
-          to: "pushplanteam@gmail.com",
+          from: "noreply@pushplan.net",
+          to: "jeff@pushplan.net",
           subject: user.username+" wants an "+phoneType+ " app!", 
           text: user.username+" wants a "+phoneType+ " app!, userID: "+ user._id+" email: "+ emailArray+ " signup email: "+ emailString
         });

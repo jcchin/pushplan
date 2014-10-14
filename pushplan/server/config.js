@@ -16,3 +16,7 @@ ServiceConfiguration.configurations.insert({
   clientId: Meteor.settings.googleClientID,
   secret: Meteor.settings.googleSecret
 });
+
+if(Meteor.settings.MAIL_URL !== undefined){
+    process.env.MAIL_URL = Meteor.settings.MAIL_URL;
+}
