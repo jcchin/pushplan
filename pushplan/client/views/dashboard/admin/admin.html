@@ -1,0 +1,85 @@
+<!-- List of Huddles -->
+<template name="admin">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9  huddle-list">
+        <ul class="nav nav-tabs"> 
+          <li><a href="#huddle_list" data-toggle="tab" id="huddles_tab">Huddles</a></li>
+          <li><a href="#huddle_stats" data-toggle="tab" id="huddle_stats_tab">Huddle Stats</a></li>
+          <li><a href="#global_stats" data-toggle="tab" id="Global_stats_tab">Global Stats</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="huddle_list">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="text-center"> Huddles Admin </h3> 
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <ul class="list-unstyled pull-left align-left">
+                      <li> <span> <span class="badge"><span class="glyphicon glyphicon-user"></span></span> Num. of Participants </span> </li> 
+                      <li> <span> <span class="badge"><span class="glyphicon glyphicon-cloud-upload"></span></span> Num. of Ideas </span> </li> 
+                      <li> <span> <span class="badge"><span class="glyphicon glyphicon-comment"></span></span> Num. of Comments </span> </li> 
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="list-unstyled pull-right align-right">
+                      <li> <span> Decision Made <span class="badge badge-success"><span class="glyphicon glyphicon-saved"></span></span></span> </li> 
+                      <li> Still Open <span class="badge"><span class="glyphicon glyphicon-saved"></span></span> </li> 
+                      <li> Leave Huddle <span class="badge badge-warning"><span class="glyphicon glyphicon-remove"></span></span> </li>
+                    </ul>
+                  </div>
+                </div>
+                <table class="table table-hover table-bordered">
+                  {{#each huddles}}
+                  <tr class="huddle-row">
+                    <td class="text-center">
+                      <span title="Leave Huddle" class="badge badge-warning delete"><span class="glyphicon glyphicon-remove"></span></span>
+                    </td>
+                    <td class="clickable text-center"><strong><a href="admin/huddles/{{_id}}">{{name}}</a></strong>: {{formatDate date_time "short"}}
+                    <!--<button type="button" class="btn btn-warning btn-xs delete" ><span class="glyphicon glyphicon-trash"></span></button></li>-->
+                    </td>
+                    <td class="clickable text-center">
+                      <span title="Num. of Participants" class="badge"><span class="glyphicon glyphicon-user"></span> {{huddle_stats _id 'users'}}</span>
+                      <span title="Num. of Ideas " class="badge"><span class="glyphicon glyphicon-cloud-upload"></span> {{huddle_stats _id 'ideas'}}</span>
+                      <span title="Num. of Comments" class="badge"><span class="glyphicon glyphicon-comment"></span> {{huddle_stats _id 'chats'}}</span>
+                    </td>
+                    <td class="clickable text-center">
+                      {{#if decision}}
+                        <span title="Decision Status" class="badge badge-success"><span class="glyphicon glyphicon-saved"></span></span>
+                      {{else}}
+                         <span title="Decision Status" class="badge"><span class="glyphicon glyphicon-saved"></span></span>
+                      {{/if}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </table>
+              </div>
+            </div><!-- /panel  -->
+          </div>
+          <div class="tab-pane" id="huddle_stats">
+            <div class="row">
+                <h4> Huddles Created </h4>
+                <div class="chart" id="huddlecount_chart"></div>
+            </div> 
+            <div class="row">
+                <h4> Ideas Per Huddle  </h4>
+                <div class="chart" id="ideacount_chart"></div>
+            </div> 
+            <div class="row">
+                <h4> People Per Huddle  </h4>
+                <div class="chart" id="peoplecount_chart"></div>
+            </div> 
+          </div>
+          <div class="tab-pane" id="global_stats">
+            <ul> 
+              <li> Total Users: {{user_count}}</li> 
+            </ul>
+          </div>
+        </div><!-- tab-content -->
+      </div>
+    </div>
+  </div>
+</template>
+  <!-- /List of Huddles -->

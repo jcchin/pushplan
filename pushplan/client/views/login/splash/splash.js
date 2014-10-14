@@ -2,6 +2,8 @@
 /*****************************************************************************/
 /* Splash: Event Handlers and Helpers .js*/
 /*****************************************************************************/
+Template.splash.services = Template._loginButtonsLoggedOutAllServices.services;
+
 Template.splash.events({
   'keyup input[name="username"]': function(event){
     Session.set('new-username', event.target.value);
@@ -15,17 +17,17 @@ Template.splash.helpers({
 
   isPasswordService: function () {
     return this.name === 'password';
-  }
+  },
+  services: Template._loginButtonsLoggedOutAllServices.__helpers[" services"],
   
 });
 
 
-Template.splash.services = Template._loginButtonsLoggedOutAllServices.services;
 
 Accounts.ui.config({
   requestPermissions: {
-    facebook: ['user_likes'],
-    github: ['user', 'repo']
+    facebook: ['email','public_profile'],
+    google: ['email', 'profile']
   },
   requestOfflineToken: {
     google: true

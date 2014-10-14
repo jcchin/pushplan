@@ -41,6 +41,7 @@
           Or login with
           <ul class="list-inline">
             {{#each services}}
+            {{log}}
               {{#if isPasswordService}}
               {{else}}
                 {{> _loginService}}

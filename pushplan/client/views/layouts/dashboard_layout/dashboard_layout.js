@@ -1,6 +1,6 @@
 
 /*****************************************************************************/
-/* DashboardLayout: Event Handlers and Helpersss .js*/
+/* DashboardLayout: Event Handlers and Helpers .js*/
 /*****************************************************************************/
 Template.DashboardLayout.events({
   /*

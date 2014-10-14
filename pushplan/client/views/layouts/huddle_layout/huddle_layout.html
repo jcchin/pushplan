@@ -1,0 +1,63 @@
+
+<template name="huddle">
+  {{#if sm}}
+    {{#if tutorialEnabled}}
+      {{tutorial optionsMobile}}
+    {{/if}}
+  {{else}}
+    {{#if tutorialEnabled}}
+      {{tutorial options}}
+    {{/if}}
+  {{/if}}
+  <nav id="desktop-nav" class="navbar navbar-static-top navbar-inverse hidden-xs hidden-sm">
+    <div class="contain">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> {{displayName ''}}</a>
+        {{#if currentUser}}
+          <!--a class="navbar-brand" href="/">{{displayName ''}}</a--> 
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        {{else}}
+          <a href="/login" class="navbar-brand">Sign In</a>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+
+  <nav id="phone-nav" class="navbar navbar-static-top navbar-inverse window window-center window-left-slide window-right-slide navbar-fixed-top hidden-md hidden-lg hidden-print" role="navigation">
+    <div id="step1m" class="navbar-header">
+      <div class="container">
+        <button type="button" id="slide-right" class="btn btn-default btn-left pull-left nav-toggle" data-target="#phone-left"><span class="glyphicon glyphicon-align-left"></span></button>
+        <a class="navbar-brand" href="/" style="margin-left: 50px;margin-right: 10px;"><span class="glyphicon glyphicon-home"></span></a>
+        {{#if currentUser}}
+          <!--<a class="navbar-brand" href="/">{{displayName ''}}</a>not enough room to display this on mobile-->
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        {{else}}
+          <a href="/login" class="navbar-brand">Sign In</a>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div id="phone-left" class="window window-left window-invert" aria-hidden="true">
+        <div class="contain"> <!-- this isn't a typo.. -->
+          <!-- Huddle Details and Invitation Panel -->
+
+          <!-- /Huddle Details and Invitation Panel -->
+        </div>
+      </div><!-- /Phone Left -->
+      <div class="window window-center window-left-slide window-right-slide">
+        <!-- Tabbed Middle Panel -->
+        
+        <!-- /Tabbed Middle Panel -->
+      </div> <!-- /window center-->
+      <div id="phone-right" class="window window-right">
+        <div class="contain">
+          <!-- Idea Detail Panel -->
+          
+          <!-- /Idea Detail Panel -->
+        </div>
+      </div> <!--Phone Right-->
+    </div>
+  </div>
+</template>

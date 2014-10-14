@@ -1,0 +1,11 @@
+<template name="ChatMessage">
+  <li class="{{checkAuthor author}}">
+    <div class="avatar">
+      <span class="glyphicon glyphicon-user"></span>
+    </div>
+    <div class="messages">
+      {{linkify string}}
+      <time>{{displayName author}} • {{checkTime created_at}}</time>
+    </div>
+  </li>
+</template>

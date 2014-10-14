@@ -1,9 +1,14 @@
 //Client Side Routes
 Router.route('splash', {
     path: '/',
-    waitOn: function() { 
+    waitOn: function() {
         Meteor.subscribe('directory');
         return;
+    },
+    onBeforeAction: function(){
+        if (Meteor.user()) {
+            this.redirect('/dashboard');
+        }
     }
 });
 Router.route('loginForm', {
@@ -13,7 +18,7 @@ Router.route('dashboard',{
     path: "/dashboard",
     layoutTemplate: 'DashboardLayout',
     loadingTemplate: 'loading',
-    waitOn: function() { 
+    waitOn: function() {
         return Meteor.subscribe("huddles");
     },
     onBeforeAction: function() {
@@ -28,7 +33,7 @@ Router.route('dashboard',{
 Router.route('dashboard',{
     path: "/dashboard/verify/:token",
     loadingTemplate: 'loading',
-    waitOn: function() { 
+    waitOn: function() {
         return Meteor.subscribe("huddles");
     },
     onBeforeAction: function() {
@@ -54,7 +59,7 @@ Router.route('logout', {
 Router.route('huddle',{
     path: "/huddles/:huddle_id",
     loadingTemplate: 'loading2',
-    waitOn: function() { 
+    waitOn: function() {
         Meteor.subscribe("ideas", Session.get('huddle_id'));
         Meteor.subscribe("huddle", Session.get('huddle_id'));
         Meteor.subscribe('directory');
@@ -72,7 +77,7 @@ Router.route('huddle',{
 Router.route('huddle_enroll',{
     path: "/huddles/:huddle_id/enroll/:token",
     loadingTemplate: 'loading',
-    waitOn: function() { 
+    waitOn: function() {
         Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
         Meteor.subscribe("huddle", Session.get('huddle_id'));
         Meteor.subscribe('directory');
@@ -91,7 +96,7 @@ Router.route('huddle_enroll',{
 Router.route('admin_dashboard', {
     path:'/admin',
     loadingTemplate: 'loading',
-    waitOn: function() { 
+    waitOn: function() {
         return Meteor.subscribe("huddles", true);
     },
     onBeforeAction: function() {
@@ -101,7 +106,7 @@ Router.route('admin_dashboard', {
 Router.route('admin_huddle', {
     path:'/admin/huddles/:huddle_id',
     loadingTemplate: 'loading',
-    waitOn: function() { 
+    waitOn: function() {
         Meteor.subscribe("ideas", Session.get('huddle_id'), Session.get('pollIndex'));
         Meteor.subscribe("huddle", Session.get('huddle_id'));
         Meteor.subscribe('directory');
@@ -247,22 +252,22 @@ Meteor.startup(function () {
     });
 
     Regulate['.add_new_poll'].onSubmit(function(error, data) {
-        var name, details; 
+        var name, details;
         //console.log(error, data)
         if(error) {
             set_form_errors(error);
         }else{
-            name = data[0].value; 
+            name = data[0].value;
             details = data[1].value;
             reset_form_errors();
 
             //have to grab the optional description value because regulate.js does not have optional inputs
-            var desc = $('form.add_new_poll').find('textarea[name=desc]').val()
+            var desc = $('form.add_new_poll').find('textarea[name=desc]').val();
             $('.add_new_poll')[0].reset();
 
             var poll = {
-                type:"vote", 
-                name: name, 
+                type:"vote",
+                name: name,
                 desc: details,
             };
             Meteor.call('new_poll', Session.get('huddle_id'), poll);
@@ -272,22 +277,22 @@ Meteor.startup(function () {
     });
     
     Regulate['.add_new_rowing_poll'].onSubmit(function(error, data) {
-        var name, details; 
+        var name, details;
         //console.log(error, data)
         if(error) {
             set_form_errors(error);
         }else{
-            name = data[0].value; 
+            name = data[0].value;
             details = data[1].value;
             reset_form_errors();
 
             //have to grab the optional description value because regulate.js does not have optional inputs
-            var desc = $('form.add_new_rowing_poll').find('textarea[name=desc]').val()
+            var desc = $('form.add_new_rowing_poll').find('textarea[name=desc]').val();
             $('.add_new_rowing_poll')[0].reset();
 
             var poll = {
-                type:"rowing", 
-                name: name, 
+                type:"rowing",
+                name: name,
                 desc: details,
             };
             Meteor.call('new_poll', Session.get('huddle_id'), poll);
@@ -301,11 +306,11 @@ Meteor.startup(function () {
             set_form_errors(error);
         }else{
             reset_form_errors();
-            name = data[0].value; 
+            name = data[0].value;
             pollIndex = data[1].value;
 
             //have to grab the optional description value because regulate.js does not have optional inputs
-            var desc = $('form.edit-poll[poll-index='+pollIndex+']').find('textarea[name=desc]').val()
+            var desc = $('form.edit-poll[poll-index='+pollIndex+']').find('textarea[name=desc]').val();
 
             query = {};
             var poll = 'polls.'+pollIndex+".";
@@ -313,7 +318,7 @@ Meteor.startup(function () {
             query[poll+"desc"] = desc;
             Huddles.update({_id:Session.get('huddle_id')}, {$set:query});
             var varName = 'edit_poll_'+pollIndex;
-            var current = Session.get(varName); 
+            var current = Session.get(varName);
             Session.set(varName, !current);
         }
     });
@@ -397,17 +402,17 @@ UI.registerHelper( //this has to be done on the server..should be refactored.
         var user = Meteor.user()._id;
         Meteor.call('serviceActive',user,service, function(error,result){
             if(service=='facebook'){
-                Session.set('fb', result)
+                Session.set('fb', result);
             }
             if(service=='google'){
-                Session.set('google', result)
+                Session.set('google', result);
             }
         });
         if(service=='facebook'){
-            return Session.get('fb')
+            return Session.get('fb');
         }
         if(service=='google'){
-            return Session.get('google')
+            return Session.get('google');
         }
     }
 );

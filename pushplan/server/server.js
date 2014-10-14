@@ -41,6 +41,30 @@ Meteor.publish('notify', function() {
 
 
 Accounts.onCreateUser(function(options, user){
+    if(_.keys(user.services)[0] =="facebook"){
+      var accessToken = user.services.facebook.accessToken,
+        result,
+        profile;
+      result = Meteor.http.get("https://graph.facebook.com/me", {
+        params: {
+          access_token: accessToken
+        }
+      });
+      if (result.error){
+        throw result.error;
+      }
+
+      profile = _.pick(result.data,
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "gender",
+        "name",
+        "timezone");
+      //console.log(profile);
+    }
+
     if (user.username) {
       user.username = user.username.toLowerCase();
     }
@@ -48,7 +72,7 @@ Accounts.onCreateUser(function(options, user){
     if (user.services){
       var service = _.keys(user.services)[0];
       if (service == "google" || service=="facebook") {
-        var email = user.services[service].email
+        var email = user.services[service].email;
         if (email) {
           email = email.toLowerCase();
           oldUser = Meteor.users.findOne({"emails.address": new RegExp(email,'i')});

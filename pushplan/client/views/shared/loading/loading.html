@@ -1,5 +1,161 @@
-
 <template name="Loading">
-  client/views/shared/loading/loading.html
+
+    <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button id="settings-button" type="button button-info" class="navbar-toggle acct_settings pull-left" data-toggle="offcanvas" data-target=".sideB-nav">
+           <span class="glyphicon glyphicon-cog"></span>
+         </button>
+        {{#if currentUser}}
+          <a class="navbar-brand" href="/">{{displayName ''}}</a>
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        {{else}}
+          <a href="/login" class="navbar-brand">Sign In</a>
+        {{/if}}
+        
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <!-- Nothing to collapse yet
+          <li><a href="/"></a></li>
+          <li><a href="/"></a></li>
+          -->
+        </ul>
+      </div><!-- /.navbar-collapse -->
+      <div class="clearfix"></div>
+    </div><!-- /.container -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <h1>&nbsp;</h1>
+            {{>spinner}}
+        </div>
+    </div>
+
 </template>
 
+
+<template name="Loading2">
+
+  <nav id="desktop-nav" class="navbar navbar-static-top navbar-inverse hidden-xs hidden-sm">
+    <div class="contain">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
+        
+          <a class="navbar-brand" href="/"></a> 
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        
+      </div>
+    </div>
+  </nav>
+  <nav id="phone-nav" class="navbar navbar-static-top navbar-inverse window window-center window-left-slide window-right-slide navbar-fixed-top visible-xs visible-sm hidden-print" role="navigation">
+    <div class="navbar-header">
+      <div class="container">
+        <button type="button" id="slide-right" class="btn btn-default btn-left pull-left nav-toggle" data-target="#phone-left"><span class="glyphicon glyphicon-align-left"></span></button>
+        <a class="navbar-brand" href="/" style="margin-left: 50px;margin-right: 10px;"><span class="glyphicon glyphicon-home"></span></a>
+        
+          <!--<a class="navbar-brand" href="/">Jeff</a>not enough room to display this on mobile-->
+          <a class="navbar-brand" href="/logout" style="font-size:small;">(Sign Out)</a>
+        
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div id="phone-left" class="window window-left window-invert" aria-hidden="true">
+        <div class="contain"> <!-- this isn't a typo.. -->
+          <!-- Huddle Details and Invitation Panel -->
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2 id="huddle-title"></h2>
+              </div>
+              <div class="panel-body">
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4>
+                Invite Link:
+                </h4>
+                <div class="details-panel">
+                  <form role="form">
+                    <div class="form-group">
+                      <input type="text" class="form-control" value="" readonly="readonly">
+                    </div>
+                  </form>
+                </div>
+                <br>
+                <h3 title="Users who have voted">Participants</h3>
+                  <p>No one has voted yet..</p>
+                  <h3 title="Users who have viewed but not voted"> Outstanding Invites </h3> 
+              </div>
+            </div>
+          </div>
+          <!-- /Huddle Details and Invitation Panel -->
+        </div>
+      </div><!-- /Phone Left -->
+      <div class="window window-center window-left-slide window-right-slide">
+        <!-- Tabbed Middle Panel -->
+        <div class="col-md-4">
+          <ul class="nav nav-pills nav-tabs">
+            <li title="group chat">
+              <a id="chat-tab-nav" href="#messages" data-toggle="tab" style="font-size:1.5em;height:2em;">
+                <span class="glyphicon glyphicon-comment"></span>
+              </a>
+            </li>
+                <li class="active">
+                <a id="poll-0-tab-nav" href="#poll_0" data-toggle="tab" poll-index="0" class="poll-tab-nav">ideas 
+                </a>
+              </li>            
+            <li title="start new poll">
+              <a id="new-poll-tab-nav" href="#new-poll" data-toggle="tab" style="font-size:1.5em; height:2em">
+                <span class="glyphicon glyphicon-plus"></span>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="messages" class="tab-pane">
+              <!-- Chat window header--> 
+                <h1>&nbsp;</h1>
+                {{>spinner}}
+              <!-- /Chat window body--> 
+            </div>
+              <div class="tab-pane active" id="poll_0">
+                <div class="row">
+                  <div class="col-md-12">
+                      <button type="button" class="btn btn-defualt btn-sm pull-right edit-poll" poll-index="0">Edit <span class="glyphicon glyphicon-cog"></span></button>
+                      <br>                         
+                  </div>
+                </div>                                                                    
+                <button type="button" class="btn btn-success btn-sm btn-wide add-idea" poll-index="0"><span style="padding-right:8px" class="fa fa-lightbulb-o fa-badge"></span>New Idea</button>
+                
+                <div class="row">
+                  <div class="col-md-12">
+
+                          <h1>&nbsp;</h1>
+                          {{>spinner}}
+
+                  </div>
+                </div>                                    
+              </div>
+            
+          </div>
+        </div>
+        <!-- /Tabbed Middle Panel -->
+      </div> <!-- /window center-->
+      <div id="phone-right" class="window window-right">
+        <div class="contain">
+          <!-- Idea Detail Panel -->
+          <div class="col-md-4">
+            
+          </div>
+          <!-- /Idea Detail Panel -->
+        </div>
+      </div> <!--Phone Right-->
+    </div>
+  </div>
+
+</template>
